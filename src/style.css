@@ -1,0 +1,36 @@
+body{
+    background : linear-gradient(0deg, rgb(120, 120, 236), rgb(77, 102, 212) 40%, rgb(221, 107, 107));
+ 
+}
+h2{
+    color:whitesmoke;
+
+}
+.divexp{
+    width: 50%;
+    float: left;
+}
+.incdiv{
+    width: 45%;
+    float: left;
+}
+span {
+    color : whitesmoke;
+    font-weight: 800 ;
+}
+label {
+    color : whitesmoke;
+    font-weight: 800 ;
+}
+td {
+    color: whitesmoke;
+}
+.vegdiv{
+    margin-left : 5em;
+}
+.grodiv{
+    margin-left : 4.5em; 
+}
+.traveldiv{
+    margin-left : 3.4em;
+}
