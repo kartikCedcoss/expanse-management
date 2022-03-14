@@ -13,6 +13,7 @@ h2{
 .incdiv{
     width: 45%;
     float: left;
+     margin-left: 3em;
 }
 span {
     color : whitesmoke;

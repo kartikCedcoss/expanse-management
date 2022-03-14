@@ -1,18 +1,25 @@
+// var totalgro = 0;
+//  var totalveg = 0;
+//  var totaltravel = 0;
+//  var totalmisc = 0;
+
+var totalincome = 0;
+
 var groArr = [];
 var vegArr = [];
 var travelArr = [];
 var miscArr = [];
 var incomeArr = [];
-var totalgro = 0;
-var totalveg = 0;
-var totaltravel = 0;
-var totalmisc = 0;
-var totalincome = 0;
+var tgro = 0;
+var tveg = 0;
+var ttravel = 0 ;
+var tmisc = 0 ;
+
 $(document).ready(function () {
   $("#btngroadd").on("click", function () {
     var grocery = document.getElementById("groinput").value;
     var groprice = document.getElementById("groprice").value;
-    totalgro = totalgro + parseInt(groprice);
+    //totalgro = totalgro + parseInt(groprice);
     $.ajax({
       url: "functions.php",
       type: "POST",
@@ -30,6 +37,7 @@ $(document).ready(function () {
    
     document.getElementById("groinput").value = "";
     document.getElementById("groprice").value = "";
+    
   });
 
 
@@ -57,7 +65,7 @@ $(document).ready(function () {
   $("#btntraveladd").on("click", function () {
     var travel = document.getElementById("travelinput").value;
     var travelprice = document.getElementById("travelprice").value;
-    totaltravel = totaltravel + parseInt(travelprice);
+    
     $.ajax({
       url: "functions.php",
       type: "POST",
@@ -78,7 +86,7 @@ $(document).ready(function () {
   $("#btnmiscadd").on("click", function () {
     var misc = document.getElementById("miscinput").value;
     var miscprice = document.getElementById("miscprice").value;
-    totalmisc = totalmisc + parseInt(miscprice);
+   
     $.ajax({
       url: "functions.php",
       type: "POST",
@@ -143,8 +151,13 @@ function displaygro(groArr) {
   }
  
   
-    html += "<tr><td></td><td>Total Cost= " +totalgro + " </td></tr></table>";
-  document.getElementById("dispgro").innerHTML = html;
+    html += "</table>";
+   
+    document.getElementById("dispgro").innerHTML = html;
+    totalgro();
+   // console.log(tgro);
+    totalcost();
+    
 }
 
 function editgro(egid) {
@@ -183,8 +196,19 @@ function deletegro(dgid) {
     groArr = JSON.parse(data);
     displaygro(groArr);
     //console.log(data);
+    
   });
 }
+function totalveg(){
+  console.log('hello');
+  var vegamt = 0;
+  for(let i=0; i<vegArr.length ;i++) {
+     vegamt += parseInt(vegArr[i].price);
+     
+  }
+  document.getElementById("dispveg2").innerHTML = vegamt;
+}
+
 
 function displayveg(vegArr) {
   html = "<table>";
@@ -210,8 +234,17 @@ function displayveg(vegArr) {
       i +
       ")'</td></tr> ";
   }
-  html += "<tr><td></td><td>Total Cost= " + totalveg + " </td></tr></table>";
+  html += "</table>";
   document.getElementById("dispveg").innerHTML = html;
+  
+  var vegamt = 0;
+  for(let i=0; i<vegArr.length ;i++) {
+     vegamt += parseInt(vegArr[i].price);
+     tveg =vegamt;
+     
+  }
+  document.getElementById("dispveg2").innerHTML = vegamt;
+  totalcost();
 }
 
 function editveg(evid) {
@@ -277,9 +310,20 @@ function displaytravel(travelArr) {
       i +
       ")'</td></tr> ";
   }
-  html += "<tr><td></td><td>Total Cost= " + totaltravel + " </td></tr></table>";
+  html += "</table>";
   document.getElementById("disptravel").innerHTML = html;
+
+  var travelamt = 0;
+  for(let i=0; i<travelArr.length ;i++) {
+     travelamt += parseInt(travelArr[i].price);
+     ttravel =travelamt;
+     
+  }
+  document.getElementById("disptravel2").innerHTML = travelamt;
+  totalcost();
 }
+
+
 
 function edittravel(etid) {
   for (let i = 0; i < travelArr.length; i++) {
@@ -344,8 +388,18 @@ function displaymisc(miscArr) {
       i +
       ")'</td></tr> ";
   }
-  html += "<tr><td></td><td>Total Cost= " + totalmisc + " </td></tr></table>";
+  html += "</table>";
   document.getElementById("dispmisc").innerHTML = html;
+
+
+  var miscamt = 0;
+  for(let i=0; i<miscArr.length ;i++) {
+     miscamt += parseInt(miscArr[i].price);
+     tmisc = miscamt;
+     
+  }
+  document.getElementById("dispmisc2").innerHTML = miscamt;
+  totalcost();
 }
 
 function editmisc(emid) {
@@ -414,6 +468,8 @@ function displayincome(incomeArr) {
   html +=
     "<tr><td></td><td></td><td>Total:" + totalincome + "</td></tr></table>";
   document.getElementById("incomedisp").innerHTML = html;
+  totalcost();
+
 }
 
 function editincome(iceid){
@@ -455,3 +511,22 @@ function deleteincome(incdid){
     })
 }
 
+
+function totalgro(){
+  var groamt = 0;
+  for(let i=0; i<groArr.length ;i++) {
+     groamt += parseInt(groArr[i].price);
+     tgro = groamt;
+     
+  }
+  document.getElementById("dispgro2").innerHTML = groamt;
+  
+}
+
+function totalcost(){
+  var ttlincome =0;
+  var ttlcost = tgro + tveg + ttravel + tmisc;
+   ttlincome = totalincome - ttlcost;
+  document.getElementById('ttlcost').innerHTML = ttlincome;
+  
+}

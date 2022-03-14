@@ -66,7 +66,7 @@ class dailyex
     public $id;
     public $item;
     public $price;
-    public $total;
+   
 
 
     public function grocery($grocery, $groprice)
@@ -74,7 +74,7 @@ class dailyex
         $this->item = $grocery;
         $this->price = $groprice;
            
-        $data = array("item" => $this->item, "price" => $this->price, "total"=> $this->total);
+        $data = array("item" => $this->item, "price" => $this->price);
         array_push($_SESSION['gro'], $data);
     }
 
